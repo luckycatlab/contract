@@ -1,0 +1,12 @@
+.idea/
+build/
+bin/
+envs/.env.test
+envs/.env.production
+.DS_Store
+node_modules/
+package-lock.json
+full/
+.vscode/
+migrations/*
+scripts/*
