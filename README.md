@@ -1,4 +1,1 @@
 # LuckyCat
-## Deployed Contracts
-### Testnet
-
