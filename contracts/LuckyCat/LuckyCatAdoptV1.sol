@@ -156,6 +156,10 @@ contract LuckyCatAdoptV1 is
 
     event Buy(uint256 series, address user, uint256 catId);
 
+    receive() payable external {}
+
+    fallback() payable external {}
+
     /* ========== INITIALIZE ========== */
 
     function initialize(
@@ -244,7 +248,7 @@ contract LuckyCatAdoptV1 is
         if (inviter != address(0) && inviter != invitee) {
             cost = cost.mul(discount).div(max);
         }
-        require(msg.value == cost, "LuckyCatAdoptV1: cost error");
+        require(msg.value >= cost, "LuckyCatAdoptV1: cost error");
         uint256[] memory ids;
 
         for (uint256 i = 0; i < amount; i++) {
@@ -275,6 +279,10 @@ contract LuckyCatAdoptV1 is
             bytes3 _inviteCode = generateInviteCode(invitee);
             userInviteCodes[invitee] = _inviteCode;
             inviteCodeUsers[_inviteCode] = invitee;
+        }
+
+        if (msg.value > cost) {
+            msg.sender.transfer(msg.value.sub(cost));
         }
     }
 
