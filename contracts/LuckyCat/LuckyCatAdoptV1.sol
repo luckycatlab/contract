@@ -150,8 +150,6 @@ contract LuckyCatAdoptV1 is
     /// @notice 7 days
     uint256 public acceleratorPeriod;
 
-    uint256 private constant acceleratorFactorMod = 1001;
-
     /* ========== EVENTS ========== */
 
     event Buy(uint256 series, address user, uint256 catId);
@@ -309,7 +307,7 @@ contract LuckyCatAdoptV1 is
         returns (uint256)
     {
         bytes32 factorHash = keccak256(abi.encodePacked(id, inviteCode));
-        return uint256(factorHash).mod(acceleratorFactorMod);
+        return uint256(factorHash).mod(10).add(1).mul(100);
     }
 
     /**
